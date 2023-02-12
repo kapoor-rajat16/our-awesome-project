@@ -1,10 +1,29 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Navbar/>
+      <BrowserRouter>
+          <Navbar />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route exact path="/profile" element={<Profile/>} />
+              <Route exact path="/login" element={<Login/>} />
+              <Route exact path="/signup" element={<Signup/>} />
+            </Routes>
+          </div>
+        </BrowserRouter>
     </>
   );
 }
