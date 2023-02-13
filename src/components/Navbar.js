@@ -21,7 +21,7 @@ export default function Navbar() {
                             <Link className={`nav-link ${location.pathname ==="/"? "active" : ""}`} aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname ==="/profile"? "active" : ""}`} to="/profile">Link</Link>
+                            <Link className={`nav-link ${location.pathname ==="/profile"? "active" : ""}`} to="/profile">Profile</Link>
                         </li>
                     </ul>
                     <Link className='btn btn-primary mx-2' to='/login' type='button'>Login</Link>
