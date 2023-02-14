@@ -1,25 +1,46 @@
-import React from 'react'
-import {Link}  from 'react-router-dom'
+import React, {useState} from 'react'
+import {Link,useNavigate}  from 'react-router-dom'
 import '../css/signup.css'
 function Login() {
 
-    // const styles = {
-    //     body: {
-    //       background: 'linear-gradient(to right, #0072ff, #00c6ff)',
-    //       display: 'flex',
-    //       alignItems: 'center',
-    //       justifyContent: 'center',
-    //       height: '100vh',
-    //       fontFamily: 'Arial, sans-serif'
-    //     }
-    //   }
-    return (
+    const [cred, setCred] = useState({email:"", password:""});
+    const navigate = useNavigate();
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        console.log(e);
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+            method:'POST',
+            headers:{ 
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({email:cred.email,password:cred.password})
+        });
+        console.log("yes");
+        const json = await response.json();
+        console.log(json); 
+        // console.log(json);
+        if(json.success){
+            //Save the auth token and redirect
+            localStorage.setItem('token', json.authtoken);
+            navigate('/');
+        }else{
+            alert("Invalid Credentials!");
+        }
+    }
+   
 
+    const onChange = (e) =>{
+        setCred({...cred, [e.target.name]:e.target.value});
+        // console.log(e.target.value);
+    }
+
+    return (
+        
         <div className="container my-5" id='login'>
-            <form action="#">
+            <form onSubmit={handleSubmit}>
                 <h1>Welcome</h1>
-                <input type="email" placeholder="Email" autocomplete="off"/>
-                <input type="password" placeholder="Password" autocomplete="off"/>
+                <input type="email" placeholder="Email" name='email' onChange={onChange} value={cred.email} autoComplete="off"/>
+                <input type="password" placeholder="Password" name='password' onChange={onChange} value={cred.password} autoComplete="off"/>
                 <button type="submit">Login</button>
                 <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
             </form>
@@ -29,3 +50,31 @@ function Login() {
 }
 
 export default Login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // const styles = {
+        //     body: {
+        //       background: 'linear-gradient(to right, #0072ff, #00c6ff)',
+        //       display: 'flex',
+        //       alignItems: 'center',
+        //       justifyContent: 'center',
+        //       height: '100vh',
+        //       fontFamily: 'Arial, sans-serif'
+        //     }
+        //   }

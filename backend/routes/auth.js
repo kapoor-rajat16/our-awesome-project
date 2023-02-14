@@ -7,9 +7,9 @@ var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser')
 
 //ROUTE 2 - Create a user, no login required
-router.post('/createuser', body('email').isEmail(), body('password').isLength({ min: 5 }), body('name').isLength({ min: 4 }),
+router.post('/createuser', body('email').isEmail(), body('password').isLength({ min: 5 }), body('firstName').isLength({ min: 1 }), body('lastName').isLength({ min: 1 }), body('regNo').isLength({ min: 8, max:8 }), body('year').isLength({ min: 1, max:1 }),
   async (req, res) => {
-
+    var success = true;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -17,18 +17,25 @@ router.post('/createuser', body('email').isEmail(), body('password').isLength({ 
 
     try {
       let user = await User.findOne({ email: req.body.email });
-
+      let userRegNo = await User.findOne({ regNo: req.body.regNo });
+      
       if (user) {
         res.status(400).json({ error: "user with this email already exists" });
       }
+      if (userRegNo) {
+        res.status(400).json({ error: "user with this registration number already exists" });
+      }
+
 
       const salt = await bcrypt.genSalt(10);
       let secPass = await bcrypt.hash(req.body.password, salt);
 
       user = await User.create({
-        name: req.body.name,
+        firstName: req.body.firstName,
+        lastName:req.body.lastName,
         regNo:req.body.regNo,
-        stream:req.body.stream,
+        course:req.body.course,
+        branch:req.body.branch,
         year:req.body.year,
         email: req.body.email,
         password: secPass
@@ -40,8 +47,9 @@ router.post('/createuser', body('email').isEmail(), body('password').isLength({ 
       }
       const JWT_SECRET = 'shhhhh';
       var authtoken = jwt.sign(data, JWT_SECRET);
-      console.log(authtoken);
-      res.send({ authtoken })
+      // console.log(authtoken);
+      success = true;
+      res.send({ authtoken , success})
     }
     catch (error) {
       console.log(error.message);
@@ -52,7 +60,7 @@ router.post('/createuser', body('email').isEmail(), body('password').isLength({ 
 //ROUTE 2 - Authenticate a user, no login required
 router.post('/login', body('email').isEmail(), body('password').exists(),
   async (req, res) => {
-
+    var success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -76,8 +84,9 @@ router.post('/login', body('email').isEmail(), body('password').exists(),
       }
       JWT_SECRET = 'shhhhh';
       var authtoken = jwt.sign(data, JWT_SECRET);
-      console.log(authtoken);
-      res.send({ authtoken });
+      // console.log(authtoken);
+      success = true;
+      res.send({ authtoken, success });
     }
     catch (error) {
       console.log(error.message);

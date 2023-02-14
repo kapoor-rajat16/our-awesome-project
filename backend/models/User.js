@@ -1,15 +1,24 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose
 const UserSchema = new Schema({
-    name:{
+    firstName:{
+        type:String,
+        required:true
+    },
+    lastName:{
         type:String,
         required:true
     },
     regNo:{
         type:String,
-        requires:true
+        requires:true,
+        unique:true
     },
-    stream:{
+    course:{
+        type:String,
+        required:true
+    },
+    branch:{
         type:String,
         required:true
     },
