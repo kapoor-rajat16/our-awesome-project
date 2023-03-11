@@ -13,6 +13,7 @@ app.use(express.json());
 
 // available Routes
 app.use('/api/auth', require('./routes/auth'));
+// app.use('/api/profile', require('./routes/profile'));
 
 app.get('/', (req,res) => {
     res.send('Welcome to Our Awesome Project');

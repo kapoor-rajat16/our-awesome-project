@@ -37,7 +37,7 @@ function Signup() {
                 <div className="col-md-6">
                 <input type="text" placeholder="First Name" name="firstName" onChange={onChange} value={cred.firstName} autoComplete="off" />
                 <input type="text" placeholder="Registration Number" name="regNo" onChange={onChange} value={cred.regNo} autoComplete="off" />
-                <input type="text" placeholder="" name="course" onChange={onChange} value={cred.course} autoComplete="off"/>
+                <input type="text" placeholder="Course" name="course" onChange={onChange} value={cred.course} autoComplete="off"/>
                 <input type="email" placeholder="Email" name="email" onChange={onChange} value={cred.email} autoComplete="off" />
                 </div>
                 <div className="col-md-6">

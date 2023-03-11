@@ -38,6 +38,10 @@ const UserSchema = new Schema({
     date:{
         type:Date,
         default:Date.now
+    },
+    img: {
+        type: String,
+        default: './uploads/defautProfilePicture.jpg'
     }
 });
 const User = mongoose.model('user', UserSchema);

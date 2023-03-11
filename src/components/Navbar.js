@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation , useNavigate} from 'react-router-dom'
 
 export default function Navbar() {
 
@@ -7,6 +7,14 @@ export default function Navbar() {
     useEffect(() => {
         // console.log(location.pathname);
     }, [location]);
+
+    let navigate = useNavigate();
+
+    let handleLogout = (e) =>{
+        e.preventDefault();
+        localStorage.removeItem('token');
+        navigate('/');
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,8 +32,10 @@ export default function Navbar() {
                             <Link className={`nav-link ${location.pathname ==="/profile"? "active" : ""}`} to="/profile">Profile</Link>
                         </li>
                     </ul>
-                    <Link className='btn btn-primary mx-2' to='/login' type='button'>Login</Link>
-                    <Link className='btn btn-primary' to='/signup' type='button'>Signup</Link>
+                    {!localStorage.getItem('token')?<div> <Link className='btn btn-primary mx-2' to='/login' type='button'>Login</Link>
+                    <Link className='btn btn-primary' to='/signup' type='button'>Signup</Link></div>: 
+                    <button onClick={handleLogout} className="btn btn-primary">Logout</button>
+                    }
                 </div>
             </div>
         </nav>
