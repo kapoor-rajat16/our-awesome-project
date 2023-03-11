@@ -29,14 +29,24 @@ function Signup() {
     setcred({...cred,[e.target.name]:e.target.value});
   }
 
+  const styleObj = {
+    backgroundColor: '#ffffff',
+    marginTop: '30px',
+    padding: '40px',
+    borderRadius: '10px',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+    textAlign: 'center',
+    width: '400px'
+}
+
   return (
-    <div className="container" id='signup'>
+    <div className="container" id='signup' style={styleObj}>
             <form onSubmit={handleSubmit}>
                 <h1>Welcome</h1>
                 <div className="row">
                 <div className="col-md-6">
                 <input type="text" placeholder="First Name" name="firstName" onChange={onChange} value={cred.firstName} autoComplete="off" />
-                <input type="text" placeholder="Registration Number" name="regNo" onChange={onChange} value={cred.regNo} autoComplete="off" />
+                <input type="text" placeholder="Registration No." name="regNo" onChange={onChange} value={cred.regNo} autoComplete="off" />
                 <input type="text" placeholder="Course" name="course" onChange={onChange} value={cred.course} autoComplete="off"/>
                 <input type="email" placeholder="Email" name="email" onChange={onChange} value={cred.email} autoComplete="off" />
                 </div>

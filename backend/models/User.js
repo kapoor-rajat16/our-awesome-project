@@ -42,6 +42,22 @@ const UserSchema = new Schema({
     img: {
         type: String,
         default: './uploads/defautProfilePicture.jpg'
+    },
+    leetcode:{
+        type: String,
+        default:'Rajat_Kapoor'
+    },
+    gfg:{
+        type:String,
+        default:null
+    },
+    codeforces:{
+        type:String,
+        default:null
+    },
+    codechef:{
+        type:String,
+        default:null
     }
 });
 const User = mongoose.model('user', UserSchema);
