@@ -31,10 +31,16 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname ==="/profile"? "active" : ""}`} to="/profile">Profile</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className={`nav-link ${location.pathname ==="/user"? "active" : ""}`} to="/user">Users</Link>
+                        </li>
                     </ul>
                     {!localStorage.getItem('token')?<div> <Link className='btn btn-primary mx-2' to='/login' type='button'>Login</Link>
                     <Link className='btn btn-primary' to='/signup' type='button'>Signup</Link></div>: 
-                    <button onClick={handleLogout} className="btn btn-primary">Logout</button>
+                    <div>
+                    <Link className="btn btn-primary mx-2" type='button' to="/profile">Profile</Link>
+                    <button onClick={handleLogout} className="btn btn-outline-primary">Logout</button>
+                    </div>
                     }
                 </div>
             </div>
