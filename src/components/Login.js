@@ -61,31 +61,3 @@ function Login() {
 }
 
 export default Login
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // const styles = {
-        //     body: {
-        //       background: 'linear-gradient(to right, #0072ff, #00c6ff)',
-        //       display: 'flex',
-        //       alignItems: 'center',
-        //       justifyContent: 'center',
-        //       height: '100vh',
-        //       fontFamily: 'Arial, sans-serif'
-        //     }
-        //   }
