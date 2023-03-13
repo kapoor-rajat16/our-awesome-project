@@ -11,7 +11,7 @@ const UserSchema = new Schema({
     },
     regNo:{
         type:String,
-        requires:true,
+        required:true,
         unique:true
     },
     course:{

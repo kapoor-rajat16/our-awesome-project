@@ -7,7 +7,7 @@ var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser')
 
 //ROUTE 2 - Create a user, no login required
-router.post('/createuser', body('email').isEmail(), body('password').isLength({ min: 5 }), body('firstName').isLength({ min: 1 }), body('lastName').isLength({ min: 1 }), body('regNo').isLength({ min: 8, max:8 }), body('year').isLength({ min: 1, max:1 }),
+router.post('/createuser', body('email').isEmail(), body('password').isLength({ min: 5 }), body('firstName').isLength({ min: 1 }), body('lastName').isLength({ min: 1 }), body('regNo').isLength({ min: 8, max: 8 }), body('year').isLength({ min: 1, max: 1 }),
   async (req, res) => {
     var success = true;
     const errors = validationResult(req);
@@ -18,7 +18,7 @@ router.post('/createuser', body('email').isEmail(), body('password').isLength({ 
     try {
       let user = await User.findOne({ email: req.body.email });
       let userRegNo = await User.findOne({ regNo: req.body.regNo });
-      
+
       if (user) {
         res.status(400).json({ error: "user with this email already exists" });
       }
@@ -32,11 +32,11 @@ router.post('/createuser', body('email').isEmail(), body('password').isLength({ 
 
       user = await User.create({
         firstName: req.body.firstName,
-        lastName:req.body.lastName,
-        regNo:req.body.regNo,
-        course:req.body.course,
-        branch:req.body.branch,
-        year:req.body.year,
+        lastName: req.body.lastName,
+        regNo: req.body.regNo,
+        course: req.body.course,
+        branch: req.body.branch,
+        year: req.body.year,
         email: req.body.email,
         password: secPass
       })
@@ -49,7 +49,7 @@ router.post('/createuser', body('email').isEmail(), body('password').isLength({ 
       var authtoken = jwt.sign(data, JWT_SECRET);
       // console.log(authtoken);
       success = true;
-      res.send({ authtoken , success})
+      res.send({ authtoken, success })
     }
     catch (error) {
       console.log(error.message);
@@ -94,15 +94,32 @@ router.post('/login', body('email').isEmail(), body('password').exists(),
     }
   })
 
-  router.post('/getuser', fetchuser, async(req,res) => {
-    try{
-      const userId = req.user.id;
-      const user = await User.findById(userId).select("-password");
-      res.json(user);
-    }
-    catch(error){
-      console.log(error.message);
-      res.status(500).send("internal server error!");
-    }
-  })
+//ROUTE 3 - Get User Data, login required
+router.post('/getuser', fetchuser, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.json(user);
+  }
+  catch (error) {
+    console.log(error.message);
+    res.status(500).send("internal server error!");
+  }
+})
+
+//ROUTE 4 - Updating User Profile, login required
+router.put('/updateuser', async (req, res) => {
+  try {
+    console.log(req.body);
+    let u = await User.findOne({ regNo: req.body.regNo });
+    console.log(u);
+    const { leetcode, codeforces, codechef, gfg, year, course, branch } = req.body;
+    const user = await User.findByIdAndUpdate(u._id, { leetcode, codeforces, gfg, codechef, year, course, branch });
+    res.send(user);
+  }
+  catch (error) {
+    console.log(error.message);
+    res.status(500).send("internal server error!");
+  }
+})
 module.exports = router

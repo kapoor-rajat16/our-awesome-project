@@ -33,10 +33,10 @@ function Profile() {
 
 
 
-  let codeforces = null;
-  let codechef = null;
-  let gfg = null;
-  let kaggle = null;
+  // let codeforces = null;
+  // let codechef = null;
+  // let gfg = null;
+  // let kaggle = null;
 
 
 
@@ -53,10 +53,18 @@ function Profile() {
     updateState({ ...updatedState, [e.target.name]: e.target.value });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(updatedState);
-    document.getElementById('close').click()
+    setPosts(updatedState);
+    // console.log(updatedState);
+    let p = fetch("http://localhost:5000/api/auth/updateuser", {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ leetcode: updatedState.leetcode, codechef: updatedState.codechef, codeforces: updatedState.codeforces, gfg: updatedState.gfg, year: updatedState.year, branch: updatedState.branch, regNo:updatedState.regNo })
+    })
+    document.getElementById('close').click();
   }
   return (
     <>
@@ -89,18 +97,18 @@ function Profile() {
                     <div className="modal-body">
                       <div className="row">
                         <div className="col-md-6">
-                          {/* <input type="text" placeholder="First Name" name="firstName" onChange={onChange} value={updatedState.firstName} autoComplete="off" /> */}
-                          {/* <input type="text" placeholder="Registration No." name="regNo" onChange={onChange} value={updatedState.regNo} autoComplete="off" /> */}
+                          <input type="text" placeholder="First Name" name="firstName" onChange={onChange} value={updatedState.firstName} autoComplete="off" style={{ display: "none" }} />
+                          <input type="text" placeholder="Registration No." name="regNo" onChange={onChange} value={updatedState.regNo} autoComplete="off" />
                           <input type="text" placeholder="Course" name="course" onChange={onChange} value={updatedState.course} autoComplete="off" required />
-                          <input type="email" placeholder="Email" name="email" onChange={onChange} value={updatedState.email} autoComplete="off" required />
+                          <input type="email" placeholder="Email" name="email" onChange={onChange} value={updatedState.email} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Leetcode Handle" name="leetcode" onChange={onChange} value={updatedState.leetcode} autoComplete="off" />
                           <input type="text" placeholder="Codeforces Handle" name="codeforces" onChange={onChange} value={updatedState.codeforces} autoComplete="off" />
                         </div>
                         <div className="col-md-6">
 
-                          {/* <input type="text" placeholder="Last Name" name="lastName" onChange={onChange} value={updatedState.lastName} autoComplete="off" /> */}
+                          <input type="text" placeholder="Last Name" name="lastName" onChange={onChange} value={updatedState.lastName} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Year" name="year" onChange={onChange} value={updatedState.year} autoComplete="off" required />
-                          <input type="text" placeholder="Branch" name="branch" onChange={onChange} value={updatedState.branch} autoComplete="off" required />
+                          <input type="text" placeholder="Branch" name="branch" onChange={onChange} value={updatedState.branch} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Codechef Handle" name="codechef" onChange={onChange} value={updatedState.codechef} autoComplete="off" />
                           <input type="text" placeholder="GFG Handle" name="gfg" onChange={onChange} value={updatedState.gfg} autoComplete="off" />
                           {/* <input type="text" placeholder="Kaggle Handle" name="kaggle" onChange={onChange} value={updatedState.gfg} autoComplete="off" /> */}
@@ -109,8 +117,8 @@ function Profile() {
                       </div>
                     </div>
                     <div className="modal-footer">
-                      <button type="button" id='close' className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" className="btn btn-primary btn-sm">Update</button>
+                      <button type='submit' id='close' className="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" className="btn btn-primary">Update</button>
                     </div>
                   </div>
                 </div>
@@ -121,23 +129,88 @@ function Profile() {
       </div>
 
       <h1>Profiles</h1>
+      <div className="row">
 
-      <div className="card mb-3" style={style}>
-        <div className="row g-0">
-          <div className="col-md-6">
-            <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
-          </div>
-          <div className="col-md-6">
-            <div className="card-body">
-              <p className="card-title">UserName: {`${posts.leetcode}`} </p>
-              <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
-              <p className="card-title">Course: {`${posts.course}`}</p>
-              <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
-              <p className="card-title">Branch: {`${posts.branch}`}</p>
-              <p className="card-title">Year: {`${posts.year}`}</p>
+        {posts.leetcode ?
+          <div classsName='col-md-6'>
+            <div className="card mb-3" style={style}>
+              <div className="row g-0">
+                <div className="col-md-6">
+                  <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
+                </div>
+                <div className="col-md-6">
+                  <div className="card-body">
+                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
+                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
+                    <p className="card-title">Course: {`${posts.course}`}</p>
+                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
+                    <p className="card-title">Branch: {`${posts.branch}`}</p>
+                    <p className="card-title">Year: {`${posts.year}`}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </div> : <div></div>}
+        {posts.codeforces ?
+          <div classsName='col-md-6'>
+            <div className="card mb-3" style={style}>
+              <div className="row g-0">
+                <div className="col-md-6">
+                  <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
+                </div>
+                <div className="col-md-6">
+                  <div className="card-body">
+                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
+                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
+                    <p className="card-title">Course: {`${posts.course}`}</p>
+                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
+                    <p className="card-title">Branch: {`${posts.branch}`}</p>
+                    <p className="card-title">Year: {`${posts.year}`}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> : <div></div>}
+        {posts.gfg ?
+          <div classsName='col-md-6'>
+            <div className="card mb-3" style={style}>
+              <div className="row g-0">
+                <div className="col-md-6">
+                  <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
+                </div>
+                <div className="col-md-6">
+                  <div className="card-body">
+                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
+                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
+                    <p className="card-title">Course: {`${posts.course}`}</p>
+                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
+                    <p className="card-title">Branch: {`${posts.branch}`}</p>
+                    <p className="card-title">Year: {`${posts.year}`}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> : <div></div>}
+        {posts.codechef ?
+          <div classsName='col-md-6'>
+            <div className="card mb-3" style={style}>
+              <div className="row g-0">
+                <div className="col-md-6">
+                  <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
+                </div>
+                <div className="col-md-6">
+                  <div className="card-body">
+                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
+                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
+                    <p className="card-title">Course: {`${posts.course}`}</p>
+                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
+                    <p className="card-title">Branch: {`${posts.branch}`}</p>
+                    <p className="card-title">Year: {`${posts.year}`}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> : <div></div>}
       </div>
     </>
 
