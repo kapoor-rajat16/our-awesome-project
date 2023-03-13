@@ -6,8 +6,7 @@ function Profile() {
   const [posts, setPosts] = useState('');
   const [updatedState, updateState] = useState('');
   const [leetcodeUser, setLeetcode] = useState('');
-
-  // https://animechan.vercel.app/api/random
+  const [codeforcesUser, setCodeforces] = useState('');
 
   useEffect(() => {
     let p = fetch("http://localhost:5000/api/auth/getuser", {
@@ -23,22 +22,19 @@ function Profile() {
     })
 
   }, [])
-
-
-
-  let leetcode = null;
+  let codeforcesUrl = 'https://codeforces.com/api/user.info?handles=' + posts.codeforces
   useEffect(() => {
-    leetcode = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((response) => response.json()).then((user) => setLeetcode(user));
+    let l = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((response) => response.json()).then((user) => {
+      setLeetcode(user);
+      console.log(user);
+    })
   }, [])
-
-
-
-  // let codeforces = null;
-  // let codechef = null;
-  // let gfg = null;
-  // let kaggle = null;
-
-
+  useEffect(() => {
+    let c = fetch(codeforcesUrl).then((response) => response.json()).then((user) => {
+      setCodeforces(user.result.at(0));
+      console.log(user.result.at(0));
+    })
+  }, [])
 
   const style = {
     width: '700px',
@@ -62,7 +58,7 @@ function Profile() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ leetcode: updatedState.leetcode, codechef: updatedState.codechef, codeforces: updatedState.codeforces, gfg: updatedState.gfg, year: updatedState.year, branch: updatedState.branch, regNo:updatedState.regNo })
+      body: JSON.stringify({ leetcode: updatedState.leetcode, codechef: updatedState.codechef, codeforces: updatedState.codeforces, gfg: updatedState.gfg, year: updatedState.year, branch: updatedState.branch, regNo: updatedState.regNo })
     })
     document.getElementById('close').click();
   }
@@ -129,6 +125,7 @@ function Profile() {
       </div>
 
       <h1>Profiles</h1>
+      <h1>{`${codeforcesUser.rank}`}</h1>
       <div className="row">
 
         {posts.leetcode ?
@@ -140,12 +137,13 @@ function Profile() {
                 </div>
                 <div className="col-md-6">
                   <div className="card-body">
-                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
+                    <p className="card-title">User Name: {`${posts.leetcode}`} </p>
                     <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
-                    <p className="card-title">Course: {`${posts.course}`}</p>
-                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
-                    <p className="card-title">Branch: {`${posts.branch}`}</p>
-                    <p className="card-title">Year: {`${posts.year}`}</p>
+                    <p className="card-title">Easy: {`${leetcodeUser.easySolved}`}</p>
+                    <p className="card-title">Medium: {`${leetcodeUser.mediumSolved}`}</p>
+                    <p className="card-title">Hard: {`${leetcodeUser.hardSolved}`}</p>
+                    <p className="card-title">Ranking: {`${leetcodeUser.ranking}`}</p>
+                    <a target={'_blank'} className='btn btn-outline-primary' href={`https://leetcode.com/${posts.leetcode}`}>Leetcode Profile</a>
                   </div>
                 </div>
               </div>
@@ -160,12 +158,13 @@ function Profile() {
                 </div>
                 <div className="col-md-6">
                   <div className="card-body">
-                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
-                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
-                    <p className="card-title">Course: {`${posts.course}`}</p>
-                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
-                    <p className="card-title">Branch: {`${posts.branch}`}</p>
-                    <p className="card-title">Year: {`${posts.year}`}</p>
+                    <p className="card-title">UserName: {`${posts.codeforces}`} </p>
+                    <p className="card-title">Rank: {`${codeforcesUser.rank}`}</p>
+                    <p className="card-title">Rating: {`${codeforcesUser.rating}`}</p>
+                    <p className="card-title">Max Rank: {`${codeforcesUser.maxRank}`}</p>
+                    <p className="card-title">Max rating: {`${codeforcesUser.maxRating}`}</p>
+                    <p className="card-title">Friends: {`${codeforcesUser.friendOfCount}`}</p>
+                    <a target={'_blank'} className='btn btn-outline-primary' href={`https://codeforces.com/profile/${posts.codeforces}`}>Codeforces Profile</a>
                   </div>
                 </div>
               </div>
