@@ -156,7 +156,7 @@ function Profile() {
             <div className="card mb-3" style={style}>
               <div className="row g-0">
                 <div className="col-md-6">
-                  <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
+                  <img src='./images/codeforces.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
                 </div>
                 <div className="col-md-6">
                   <div className="card-body">
@@ -176,7 +176,7 @@ function Profile() {
             <div className="card mb-3" style={style}>
               <div className="row g-0">
                 <div className="col-md-6">
-                  <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
+                  <img src='./images/gfg.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
                 </div>
                 <div className="col-md-6">
                   <div className="card-body">
@@ -196,7 +196,7 @@ function Profile() {
             <div className="card mb-3" style={style}>
               <div className="row g-0">
                 <div className="col-md-6">
-                  <img src='./images/leetcode.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
+                  <img src='./images/codechef.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
                 </div>
                 <div className="col-md-6">
                   <div className="card-body">

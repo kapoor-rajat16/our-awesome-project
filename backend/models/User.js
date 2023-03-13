@@ -45,7 +45,7 @@ const UserSchema = new Schema({
     },
     leetcode:{
         type: String,
-        default:'Rajat_Kapoor'
+        default:null
     },
     gfg:{
         type:String,
