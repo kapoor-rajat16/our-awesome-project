@@ -6,12 +6,13 @@ const { body, validationResult } = require('express-validator');
 
 router.post('/createquery', async (req, res) => {
     try {
-        query = await Query.create({
+        let query = await Query.create({
             regNo: req.body.regNo,
+            heading:req.body.heading,
             text: req.body.text,
             tag: req.body.tag
         })
-        res.send("Success");
+        res.send(query);
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ error: "Something went wrong" })
@@ -20,9 +21,11 @@ router.post('/createquery', async (req, res) => {
 
 router.put('/updatequery', async (req, res) => {
     try {
-        const { _id, text, tag } = req.body;
-        const q = await Query.findByIdAndUpdate(_id, { text, tag });
-        res.send("Updated Successfully");
+        const { _id, text, tag ,heading} = req.body;
+        const query = await Query.findByIdAndUpdate(_id, { text, tag , heading});
+        console.log("Updated Successfully");
+        const updatedQuery = await Query.findById(_id);
+        res.send(updatedQuery);
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ error: "Something went wrong" })
