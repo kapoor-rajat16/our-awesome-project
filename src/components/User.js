@@ -42,8 +42,8 @@ function User() {
   return (
     <>
       <div className="container" style={{width:"600px"}}>
-        <h4 className='mx-auto my-3'>Get User Profile Details Via Registration Number</h4>
-        <label htmlFor="regNo" className="form-label">Enter Registration Number</label>
+        <h4 style={{color:'#ffffff'}} className='mx-auto my-3'>Get User Profile Details Via Registration Number</h4>
+        <label style={{color:'#ffffff'}} htmlFor="regNo" className="form-label">Enter Registration Number</label>
         <form method='get' onSubmit={handleSubmit} action="submit">
           <input onChange={handleChange} type="text" id="regno" className="form-control" aria-describedby="passwordHelpBlock" />
           <button type='submit'>Find Details</button>

@@ -16,25 +16,40 @@ function Profile() {
         'auth-token': localStorage.getItem("token")
       }
     }).then((response) => response.json()).then((user) => {
-      console.log(user);
+      // console.log(user);
       setPosts(user);
       updateState(user);
     })
+  }, [])
 
-  }, [])
+
+  let findLeetcode = () => {
+    let l = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((res) =>{
+      return res.json();
+    }).then((data) =>{
+      setLeetcode(data);
+    })
+    return;
+  }
+
+  if (posts.leetcode) {
+    findLeetcode();
+  }
+
   let codeforcesUrl = 'https://codeforces.com/api/user.info?handles=' + posts.codeforces
-  useEffect(() => {
-    let l = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((response) => response.json()).then((user) => {
-      setLeetcode(user);
-      console.log(user);
+  let findCodeforces = () => {
+    let c = fetch(codeforcesUrl).then((res) => {
+      return res.json();
+    }).then((data) =>{
+      setCodeforces(data.result.at(0));
     })
-  }, [])
-  useEffect(() => {
-    let c = fetch(codeforcesUrl).then((response) => response.json()).then((user) => {
-      setCodeforces(user.result.at(0));
-      console.log(user.result.at(0));
-    })
-  }, [])
+    return;
+  }
+  if (posts.codeforces) {
+    findCodeforces();
+  }
+
+
 
   const style = {
     width: '700px',
@@ -60,6 +75,12 @@ function Profile() {
       },
       body: JSON.stringify({ leetcode: updatedState.leetcode, codechef: updatedState.codechef, codeforces: updatedState.codeforces, gfg: updatedState.gfg, year: updatedState.year, branch: updatedState.branch, regNo: updatedState.regNo, about: updatedState.about })
     })
+    if (posts.leetcode) {
+      findLeetcode();
+    }
+    if (posts.codeforces) {
+      findCodeforces();
+    }
     document.getElementById('close').click();
   }
   return (
@@ -113,7 +134,7 @@ function Profile() {
 
                         <div className="col-md-12">
                           <label htmlFor="about">About Yourself</label>
-                          <textarea className="form-control my-2" id="about" name="about" onChange={onChange} value={updatedState.about} style={{height: "170px"}}></textarea>
+                          <textarea className="form-control my-2" id="about" name="about" onChange={onChange} value={updatedState.about} style={{ height: "170px" }}></textarea>
                         </div>
                       </div>
                     </div>

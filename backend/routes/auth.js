@@ -114,7 +114,7 @@ router.put('/updateuser', async (req, res) => {
     // console.log(req.body);
     let u = await User.findOne({ regNo: req.body.regNo });
     console.log(u);
-    const { leetcode, codeforces, codechef, gfg, year, course, branch } = req.body;
+    const { leetcode, codeforces, codechef, gfg, year, course, branch, about } = req.body;
     const user = await User.findByIdAndUpdate(u._id, { leetcode, codeforces, gfg, codechef, year, course, branch,about });
     res.send(user);
   }
