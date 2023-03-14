@@ -58,7 +58,7 @@ function Profile() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ leetcode: updatedState.leetcode, codechef: updatedState.codechef, codeforces: updatedState.codeforces, gfg: updatedState.gfg, year: updatedState.year, branch: updatedState.branch, regNo: updatedState.regNo })
+      body: JSON.stringify({ leetcode: updatedState.leetcode, codechef: updatedState.codechef, codeforces: updatedState.codeforces, gfg: updatedState.gfg, year: updatedState.year, branch: updatedState.branch, regNo: updatedState.regNo, about: updatedState.about })
     })
     document.getElementById('close').click();
   }
@@ -110,6 +110,11 @@ function Profile() {
                           {/* <input type="text" placeholder="Kaggle Handle" name="kaggle" onChange={onChange} value={updatedState.gfg} autoComplete="off" /> */}
                           {/* <input type="password" placeholder="Password" name="password" onChange={onChange} value={posts.password} autoComplete="off" /> */}
                         </div>
+
+                        <div className="col-md-12">
+                          <label htmlFor="about">About Yourself</label>
+                          <textarea className="form-control my-2" id="about" name="about" onChange={onChange} value={updatedState.about} style={{height: "170px"}}></textarea>
+                        </div>
                       </div>
                     </div>
                     <div className="modal-footer">
@@ -121,11 +126,14 @@ function Profile() {
               </div>
             </form>
           </div>
+          {/* <div className='col-md-5'></div> */}
+          <div className="col-md-12">
+            <p>About: {`${posts.about}`}</p>
+          </div>
         </div>
       </div>
 
       <h1>Profiles</h1>
-      <h1>{`${codeforcesUser.rank}`}</h1>
       <div className="row">
 
         {posts.leetcode ?
@@ -170,7 +178,7 @@ function Profile() {
               </div>
             </div>
           </div> : <div></div>}
-        {posts.gfg ?
+        {/* {posts.gfg ?
           <div classsName='col-md-6'>
             <div className="card mb-3" style={style}>
               <div className="row g-0">
@@ -209,7 +217,7 @@ function Profile() {
                 </div>
               </div>
             </div>
-          </div> : <div></div>}
+          </div> : <div></div>} */}
       </div>
     </>
 

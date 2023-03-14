@@ -38,7 +38,8 @@ router.post('/createuser', body('email').isEmail(), body('password').isLength({ 
         branch: req.body.branch,
         year: req.body.year,
         email: req.body.email,
-        password: secPass
+        password: secPass,
+        about:req.body.about
       })
       const data = {
         user: {
@@ -114,7 +115,7 @@ router.put('/updateuser', async (req, res) => {
     let u = await User.findOne({ regNo: req.body.regNo });
     console.log(u);
     const { leetcode, codeforces, codechef, gfg, year, course, branch } = req.body;
-    const user = await User.findByIdAndUpdate(u._id, { leetcode, codeforces, gfg, codechef, year, course, branch });
+    const user = await User.findByIdAndUpdate(u._id, { leetcode, codeforces, gfg, codechef, year, course, branch,about });
     res.send(user);
   }
   catch (error) {

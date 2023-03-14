@@ -9,6 +9,9 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
+    about:{
+        type:String
+    },
     regNo:{
         type:String,
         required:true,

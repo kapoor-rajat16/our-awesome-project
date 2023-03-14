@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../css/signup.css'
 function Signup() {
 
-  const [cred, setcred] = useState({ firstName: "", lastName: "", regNo: "", course: "", email: "", year: "", branch: "", password: "" });
+  const [cred, setcred] = useState({ firstName: "", lastName: "", regNo: "", course: "", email: "", year: "", branch: "", password: "" ,about:""});
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,7 +12,7 @@ function Signup() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ firstName: cred.firstName, lastName: cred.lastName, regNo: cred.regNo, course: cred.course, year: cred.year, branch: cred.branch, email: cred.email, password: cred.password })
+      body: JSON.stringify({ firstName: cred.firstName, lastName: cred.lastName, regNo: cred.regNo, course: cred.course, year: cred.year, branch: cred.branch, email: cred.email, password: cred.password, about: cred.about })
     })
     const json = await response.json();
     console.log(json);
@@ -56,6 +56,13 @@ function Signup() {
             <input type="text" placeholder="Year" name="year" onChange={onChange} value={cred.year} autoComplete="off" />
             <input type="text" placeholder="Branch" name="branch" onChange={onChange} value={cred.branch} autoComplete="off" />
             <input type="password" placeholder="Password" name="password" onChange={onChange} value={cred.password} autoComplete="off" />
+          </div>
+
+          <div className="col-md-12">
+            <div className="form-floating">
+              <textarea className="form-control my-2" id="about" name="about" onChange={onChange} value={cred.about} style={{height: "170px"}}></textarea>
+              <label htmlFor="about">Tell About Yourself</label>
+            </div>
           </div>
           <button type="submit">Sign Up</button>
         </div>
