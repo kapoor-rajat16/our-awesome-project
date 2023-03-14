@@ -41,13 +41,14 @@ function User() {
 
   return (
     <>
-
-      <h3 className='mx-auto my-3'>Get User Profile Details Via Registration Number</h3>
-      <label htmlFor="regNo" className="form-label">Enter Registration Number</label>
-      <form method='get' onSubmit={handleSubmit} action="submit">
-        <input onChange={handleChange} type="text" id="regno" className="form-control" aria-describedby="passwordHelpBlock" />
-        <button type='submit'>Find Details</button>
-      </form>
+      <div className="container" style={{width:"600px"}}>
+        <h4 className='mx-auto my-3'>Get User Profile Details Via Registration Number</h4>
+        <label htmlFor="regNo" className="form-label">Enter Registration Number</label>
+        <form method='get' onSubmit={handleSubmit} action="submit">
+          <input onChange={handleChange} type="text" id="regno" className="form-control" aria-describedby="passwordHelpBlock" />
+          <button type='submit'>Find Details</button>
+        </form>
+      </div>
 
       {
         exists ? <div>
@@ -68,7 +69,7 @@ function User() {
               </div>
             </div>
           </div>
-          <h1>Coding Profiles</h1>
+          <h2 className='mx-auto'>Coding Profiles</h2>
         </div> : <div></div>
       }
       <div className="row">

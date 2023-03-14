@@ -1,8 +1,9 @@
 import React from 'react'
+import Query from './Query'
 
 function Home() {
   return (
-    <div>Home</div>
+    <Query/>
   )
 }
 
