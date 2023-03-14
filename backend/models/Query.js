@@ -1,13 +1,16 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose
 const QuerySchema = new Schema({
-    user:{
+    regNo:{
+        type:String,
+        required:true
+    },
+    text:{
         type:String,
         required:true
     },
     tag:{
         type:String,
-        required:true
     },
     date:{
         type:Date,

@@ -111,7 +111,7 @@ router.post('/getuser', fetchuser, async (req, res) => {
 //ROUTE 4 - Updating User Profile, login required
 router.put('/updateuser', async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     let u = await User.findOne({ regNo: req.body.regNo });
     console.log(u);
     const { leetcode, codeforces, codechef, gfg, year, course, branch } = req.body;
