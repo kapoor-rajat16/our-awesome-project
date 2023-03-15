@@ -57,7 +57,7 @@ export default function Ask() {
             <label htmlFor="floatingTextarea2">Query</label>
           </div>
           <div class="input-group my-3" style={{ width: '580px' }}>
-            <label class="input-group-text" for="tag">Tag</label>
+            <label class="input-group-text" for="tag" required>Tag</label>
             <select class="form-select" id="tag" name='tag' onChange={onChange} value={query.tag} required>
               <option selected>Choose...</option>
               <option value="1">Coding</option>
