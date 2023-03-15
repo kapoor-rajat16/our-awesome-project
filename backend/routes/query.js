@@ -15,6 +15,7 @@ router.post('/createquery', async (req, res) => {
         res.send(query);
     } catch (error) {
         console.log(error.message);
+        alert('Please Login!')
         res.status(500).json({ error: "Something went wrong" })
     }
 })

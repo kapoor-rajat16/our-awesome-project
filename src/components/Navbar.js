@@ -31,6 +31,11 @@ export default function Navbar() {
                         {/* <li className="nav-item">
                             <Link className={`nav-link ${location.pathname ==="/profile"? "active" : ""}`} to="/profile">Profile</Link>
                         </li> */}
+                        {localStorage.getItem('token')?<div>
+                        <li className="nav-item">
+                            <Link className={`nav-link ${location.pathname ==="/ask"? "active" : ""}`} to="/ask">Ask</Link>
+                        </li>
+                        </div>:<div></div>}
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname ==="/user"? "active" : ""}`} to="/user">Users</Link>
                         </li>

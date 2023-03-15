@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import User from './components/User';
+import Ask from './components/Ask';
 import {
   BrowserRouter,
   Routes,
@@ -21,6 +22,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route exact path="/profile" element={<Profile/>} />
               <Route exact path="/user" element={<User/>} />
+              <Route exact path="/ask" element={<Ask/>} />
               <Route exact path="/login" element={<Login/>} />
               <Route exact path="/signup" element={<Signup/>} />
             </Routes>
