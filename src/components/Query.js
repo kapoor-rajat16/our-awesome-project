@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 export default function Query(props) {
     const navigate = useNavigate();
-    const { heading, text, tag, regNo, _id } = props.query;
+    const { heading, text, tag, regNo,userName, _id } = props.query;
     const x = { "id": _id };
     const [user, setUser] = useState('')
 
@@ -39,11 +39,12 @@ export default function Query(props) {
         <div className="container my-5">
             <div className="card my-2 mx-auto" style={{ width: "1000px" }}>
                 <div className="card-header">
-                    {tag}
+                    {userName}
                 </div>
                 <div className="card-body">
                     <h5 className="card-title pb-4">{heading}</h5>
                     <p className="card-text pb-2">{text}</p>
+                    <p>#{tag}</p>
                     <a href="#" className="btn btn-outline-primary btn-sm">Go somewhere</a>
                     {user.regNo == regNo ? <div>
                         <img style={{ height: '40px' }} onClick={onClick} className='btn' src="./images/delete.webp" alt="" />

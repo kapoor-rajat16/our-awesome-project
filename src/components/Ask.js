@@ -37,7 +37,7 @@ export default function Ask() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ heading: query.heading, text: query.text, tag: query.tag, regNo: user.regNo })
+      body: JSON.stringify({ heading: query.heading, text: query.text, tag: query.tag, regNo: user.regNo, firstName:user.firstName, lastName:user.lastName })
     })
     const json = await response.json();
     console.log(json);

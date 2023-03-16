@@ -5,6 +5,10 @@ const QuerySchema = new Schema({
         type:String,
         required:true
     },
+    userName:{
+        type:String,
+        required:true
+    },
     heading:{
         type:String,
         required:true
