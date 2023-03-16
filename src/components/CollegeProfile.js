@@ -16,12 +16,12 @@ export default function CollegeProfile(props) {
             </div>
             <div className="col-md-8">
                 <div className="card-body">
-                    <p className="card-title">Name: {`${props.user.firstName}`} {`${props.user.lastName}`}</p>
-                    <p className="card-title">Email: {`${props.user.email}`}</p>
-                    <p className="card-title">Course: {`${props.user.course}`}</p>
-                    <p className="card-title">Registration Number: {`${props.user.regNo}`}</p>
-                    <p className="card-title">Branch: {`${props.user.branch}`}</p>
-                    <p className="card-title">Year: {`${props.user.year}`}</p>
+                    <p className="card-title">Name: {`${props.queryuser.firstName}`} {`${props.queryuser.lastName}`}</p>
+                    <p className="card-title">Email: {`${props.queryuser.email}`}</p>
+                    <p className="card-title">Course: {`${props.queryuser.course}`}</p>
+                    <p className="card-title">Registration Number: {`${props.queryuser.regNo}`}</p>
+                    <p className="card-title">Branch: {`${props.queryuser.branch}`}</p>
+                    <p className="card-title">Year: {`${props.queryuser.year}`}</p>
                 </div>
             </div>
         </div>
