@@ -18,6 +18,7 @@ router.post('/createquery', async (req, res) => {
     try {
         let query = await Query.create({
             regNo: req.body.regNo,
+            userName:req.body.firstName + ' ' +req.body.lastName,
             heading:req.body.heading,
             text: req.body.text,
             tag: req.body.tag

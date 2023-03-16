@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 export default function Ask() {
   const navigate = useNavigate();
 
-  const [query, setQuery] = useState({ heading: '', text: '', tag: ''});
+  const [query, setQuery] = useState({ heading: '', text: '', tag: '', regNo:''});
   const [user, setUser] = useState('');
   useEffect(() => {
     let p = fetch("http://localhost:5000/api/auth/getuser", {
@@ -16,6 +16,7 @@ export default function Ask() {
     }).then((response) => response.json()).then((res) => {
       // console.log(res);
       setUser(res);
+      setQuery({ heading: '', text: '', tag: '', regNo:user.regNo})
     })
   }, [])
 
@@ -36,7 +37,7 @@ export default function Ask() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ heading: query.heading, text: query.text, tag: query.tag, regNo: user.regNo })
+      body: JSON.stringify({ heading: query.heading, text: query.text, tag: query.tag, regNo: user.regNo, firstName:user.firstName, lastName:user.lastName })
     })
     const json = await response.json();
     console.log(json);
