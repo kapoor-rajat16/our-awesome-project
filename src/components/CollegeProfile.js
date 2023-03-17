@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 export default function CollegeProfile(props) {
+
     const style = {
         width: '500px',
         marginLeft: 'auto',

@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import CollegeProfile from './CollegeProfile';
 export default function Query(props) {
-    
+
     const { heading, text, tag, regNo, userName, _id } = props.query;
     const x = { "id": _id };
     const y = { "regNo": regNo };
     const [user, setUser] = useState('')
     const [queryuser, setQueryuser] = useState('');
-    const [query, setQuery] = useState({heading:heading, text:text, regNo:regNo, userName:userName, _id:_id});
+    const [query, setQuery] = useState({ heading: heading, text: text, regNo: regNo, userName: userName, _id: _id });
     // const [queryRegNo, setQueryRegNo] = useState({regNo:''})
     // setQueryRegNo({regNo:regNo});
+
+    const style = {
+        width: '500px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        textAlign: 'center',
+        padding: '10px',
+        marginTop: '20px'
+      }
+
     useEffect(() => {
         let p = fetch("http://localhost:5000/api/auth/getuser", {
             method: 'POST',
@@ -38,27 +48,27 @@ export default function Query(props) {
         })
     }
 
-    const getUser = async(e) => {
+    const getUser = async (e) => {
         e.preventDefault();
         // const input = document.getElementById('queryRegNo');
         console.log(query.regNo);
-        
-        // const response = await fetch('http://localhost:5000/api/user', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({regNo:regNo})
-        // });
-        // const json = await response.json();
-        // setQueryuser(json);
-        // console.log(queryuser)
-        // const btn = document.getElementById('modalbtn');
-        // btn.click();
+
+        const response = await fetch('http://localhost:5000/api/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ regNo: query.regNo })
+        });
+        const json = await response.json();
+        setQueryuser(json);
+        console.log(queryuser)
+        const btn = document.getElementById('modalbtn');
+        btn.click();
     }
 
-    const clickFormBtn = (e) =>{
-        const btn = document.getElementById('formBtn');
+    const clickFormBtn = (e) => {
+        const btn = document.getElementById(_id);
         btn.click();
     }
 
@@ -70,8 +80,8 @@ export default function Query(props) {
                     <div className="card-header" id='header' onClick={clickFormBtn}>
                         {userName} - {regNo}
                         <form method="post" onSubmit={getUser}>
-                            <input type="text" id='queryRegNo' value={regNo}  name='regNo' style={{display:'none'}}/>
-                            <button type='submit' id='formBtn' style={{display:'none'}}></button>
+                            <input type="text" id={regNo} value={regNo} name='regNo' style={{ display: 'none' }} />
+                            <button type='submit' id={_id} style={{ display: 'none' }}></button>
                         </form>
                     </div>
                     <div className="card-body">
@@ -86,7 +96,7 @@ export default function Query(props) {
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profile" id='modalbtn' style={{display:'none'}}></button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target='#profile' id='modalbtn' style={{ display: 'none' }}></button>
 
             <div class="modal fade" tabindex="-1" id='profile' aria-hidden="true">
                 <div class="modal-dialog">
@@ -96,7 +106,21 @@ export default function Query(props) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <CollegeProfile queryuser={queryuser} />
+                            <div className="row" style={style}>
+                                <div className="col-md-4">
+                                    <img src='./images/defaultProfilePicture.jpg' className="img-fluid rounded-start py-3" alt="..." style={{ width: '150px' }} />
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-body">
+                                        <p className="card-title">Name: {`${queryuser.firstName}`} {`${queryuser.lastName}`}</p>
+                                        <p className="card-title">Email: {`${queryuser.email}`}</p>
+                                        <p className="card-title">Course: {`${queryuser.course}`}</p>
+                                        <p className="card-title">Registration Number: {`${queryuser.regNo}`}</p>
+                                        <p className="card-title">Branch: {`${queryuser.branch}`}</p>
+                                        <p className="card-title">Year: {`${queryuser.year}`}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
