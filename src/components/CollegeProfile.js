@@ -1,6 +1,9 @@
-import React, {useEffect} from 'react'
+import React, { useState } from 'react'
 
 export default function CollegeProfile(props) {
+
+    // const [data, setData] = useState({firstName:'', lastName:'',email:'',course:'',regNo:'',branch:'',year:''});
+    // setData(props.queryuser);
 
     const style = {
         width: '500px',
@@ -9,7 +12,8 @@ export default function CollegeProfile(props) {
         textAlign: 'center',
         padding: '10px',
         marginTop: '20px'
-      }
+    }
+
     return (
         <div className="row" style={style}>
             <div className="col-md-4">

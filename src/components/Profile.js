@@ -22,34 +22,26 @@ function Profile() {
     })
   }, [])
 
-
-  let findLeetcode = () => {
-    let l = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((res) =>{
+  useEffect(() => {
+    console.log(posts);
+    let l = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((res) => {
       return res.json();
-    }).then((data) =>{
+    }).then((data) => {
       setLeetcode(data);
+      console.log(leetcodeUser);
     })
-    return;
-  }
+  }, [posts])
 
-  if (posts.leetcode) {
-    findLeetcode();
-  }
 
-  let codeforcesUrl = 'https://codeforces.com/api/user.info?handles=' + posts.codeforces
-  let findCodeforces = () => {
-    let c = fetch(codeforcesUrl).then((res) => {
+  // let codeforcesUrl = 'https://codeforces.com/api/user.info?handles=' + posts.codeforces
+  useEffect(() => {
+    let c = fetch(`https://codeforces.com/api/user.info?handles=${posts.codeforces}`).then((res) => {
       return res.json();
-    }).then((data) =>{
+    }).then((data) => {
       setCodeforces(data.result.at(0));
+      console.log(codeforcesUser);
     })
-    return;
-  }
-  if (posts.codeforces) {
-    findCodeforces();
-  }
-
-
+  }, [posts])
 
   const style = {
     width: '700px',
@@ -75,12 +67,6 @@ function Profile() {
       },
       body: JSON.stringify({ leetcode: updatedState.leetcode, codechef: updatedState.codechef, codeforces: updatedState.codeforces, gfg: updatedState.gfg, year: updatedState.year, branch: updatedState.branch, regNo: updatedState.regNo, about: updatedState.about })
     })
-    if (posts.leetcode) {
-      findLeetcode();
-    }
-    if (posts.codeforces) {
-      findCodeforces();
-    }
     document.getElementById('close').click();
   }
   return (

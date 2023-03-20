@@ -11,15 +11,6 @@ export default function Query(props) {
     // const [queryRegNo, setQueryRegNo] = useState({regNo:''})
     // setQueryRegNo({regNo:regNo});
 
-    const style = {
-        width: '500px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        textAlign: 'center',
-        padding: '10px',
-        marginTop: '20px'
-      }
-
     useEffect(() => {
         let p = fetch("http://localhost:5000/api/auth/getuser", {
             method: 'POST',
@@ -106,21 +97,7 @@ export default function Query(props) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div className="row" style={style}>
-                                <div className="col-md-4">
-                                    <img src='./images/defaultProfilePicture.jpg' className="img-fluid rounded-start py-3" alt="..." style={{ width: '150px' }} />
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="card-body">
-                                        <p className="card-title">Name: {`${queryuser.firstName}`} {`${queryuser.lastName}`}</p>
-                                        <p className="card-title">Email: {`${queryuser.email}`}</p>
-                                        <p className="card-title">Course: {`${queryuser.course}`}</p>
-                                        <p className="card-title">Registration Number: {`${queryuser.regNo}`}</p>
-                                        <p className="card-title">Branch: {`${queryuser.branch}`}</p>
-                                        <p className="card-title">Year: {`${queryuser.year}`}</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <CollegeProfile queryuser = {queryuser}/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
