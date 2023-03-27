@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import axios from 'axios';
 
 function Profile() {
 
@@ -24,7 +23,7 @@ function Profile() {
 
   useEffect(() => {
     console.log(posts);
-    let l = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((res) => {
+    let l = fetch(`https://leetcodestats.cyclic.app/${posts.leetcode}`).then((res) => {
       return res.json();
     }).then((data) => {
       setLeetcode(data);
@@ -87,7 +86,7 @@ function Profile() {
             </div>
           </div>
           <div className='col-md-1'>
-            <img src="./images/setting.jpg" alt="Edit Profile" data-bs-toggle="modal" data-bs-target="#updateProfile" style={{ borderRadius: '100%', width: '40px', cursor: 'pointer' }} />
+            <img src="./images/gear.png" className='my-2' alt="Edit Profile" data-bs-toggle="modal" data-bs-target="#updateProfile" style={{width: '30px', cursor: 'pointer' }} />
             {/* Modal */}
             <form onSubmit={handleSubmit}>
               <div className="modal fade" id="updateProfile" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,21 +100,19 @@ function Profile() {
                       <div className="row">
                         <div className="col-md-6">
                           <input type="text" placeholder="First Name" name="firstName" onChange={onChange} value={updatedState.firstName} autoComplete="off" style={{ display: "none" }} />
-                          <input type="text" placeholder="Registration No." name="regNo" onChange={onChange} value={updatedState.regNo} autoComplete="off" />
+                          <input type="text" placeholder="Registration No." name="regNo" onChange={onChange} value={updatedState.regNo} autoComplete="off" style={{ display: "none" }}/>
                           <input type="text" placeholder="Course" name="course" onChange={onChange} value={updatedState.course} autoComplete="off" required />
                           <input type="email" placeholder="Email" name="email" onChange={onChange} value={updatedState.email} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Leetcode Handle" name="leetcode" onChange={onChange} value={updatedState.leetcode} autoComplete="off" />
-                          <input type="text" placeholder="Codeforces Handle" name="codeforces" onChange={onChange} value={updatedState.codeforces} autoComplete="off" />
                         </div>
                         <div className="col-md-6">
 
                           <input type="text" placeholder="Last Name" name="lastName" onChange={onChange} value={updatedState.lastName} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Year" name="year" onChange={onChange} value={updatedState.year} autoComplete="off" required />
                           <input type="text" placeholder="Branch" name="branch" onChange={onChange} value={updatedState.branch} autoComplete="off" style={{ display: "none" }} />
-                          <input type="text" placeholder="Codechef Handle" name="codechef" onChange={onChange} value={updatedState.codechef} autoComplete="off" />
-                          <input type="text" placeholder="GFG Handle" name="gfg" onChange={onChange} value={updatedState.gfg} autoComplete="off" />
-                          {/* <input type="text" placeholder="Kaggle Handle" name="kaggle" onChange={onChange} value={updatedState.gfg} autoComplete="off" /> */}
-                          {/* <input type="password" placeholder="Password" name="password" onChange={onChange} value={posts.password} autoComplete="off" /> */}
+                          <input type="text" placeholder="Codeforces Handle" name="codeforces" onChange={onChange} value={updatedState.codeforces} autoComplete="off" />
+                          <input type="text" placeholder="Codechef Handle" name="codechef" onChange={onChange} value={updatedState.codechef} autoComplete="off" style={{ display: "none" }}/>
+                          <input type="text" placeholder="GFG Handle" name="gfg" onChange={onChange} value={updatedState.gfg} autoComplete="off" style={{ display: "none" }}/>
                         </div>
 
                         <div className="col-md-12">
@@ -185,46 +182,6 @@ function Profile() {
               </div>
             </div>
           </div> : <div></div>}
-        {/* {posts.gfg ?
-          <div classsName='col-md-6'>
-            <div className="card mb-3" style={style}>
-              <div className="row g-0">
-                <div className="col-md-6">
-                  <img src='./images/gfg.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
-                </div>
-                <div className="col-md-6">
-                  <div className="card-body">
-                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
-                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
-                    <p className="card-title">Course: {`${posts.course}`}</p>
-                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
-                    <p className="card-title">Branch: {`${posts.branch}`}</p>
-                    <p className="card-title">Year: {`${posts.year}`}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> : <div></div>}
-        {posts.codechef ?
-          <div classsName='col-md-6'>
-            <div className="card mb-3" style={style}>
-              <div className="row g-0">
-                <div className="col-md-6">
-                  <img src='./images/codechef.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
-                </div>
-                <div className="col-md-6">
-                  <div className="card-body">
-                    <p className="card-title">UserName: {`${posts.leetcode}`} </p>
-                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
-                    <p className="card-title">Course: {`${posts.course}`}</p>
-                    <p className="card-title">Registration Number: {`${posts.regNo}`}</p>
-                    <p className="card-title">Branch: {`${posts.branch}`}</p>
-                    <p className="card-title">Year: {`${posts.year}`}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> : <div></div>} */}
       </div>
     </>
 

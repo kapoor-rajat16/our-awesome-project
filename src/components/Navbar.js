@@ -28,17 +28,16 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname ==="/"? "active" : ""}`} aria-current="page" to="/">Home</Link>
                         </li>
-                        {/* <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname ==="/profile"? "active" : ""}`} to="/profile">Profile</Link>
-                        </li> */}
                         {localStorage.getItem('token')?<div>
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname ==="/ask"? "active" : ""}`} to="/ask">Ask</Link>
                         </li>
                         </div>:<div></div>}
+                        {localStorage.getItem('token')?<div>
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname ==="/user"? "active" : ""}`} to="/user">Users</Link>
                         </li>
+                        </div>:<div></div>}
                     </ul>
                     {!localStorage.getItem('token')?<div> <Link className='btn btn-primary mx-2' to='/login' type='button'>Login</Link>
                     <Link className='btn btn-primary' to='/signup' type='button'>Signup</Link></div>: 

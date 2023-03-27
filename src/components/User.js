@@ -114,46 +114,6 @@ function User() {
               </div>
             </div>
           </div> : <div></div>}
-        {user.gfg ?
-          <div classsName='col-md-6'>
-            <div className="card mb-3" style={style}>
-              <div className="row g-0">
-                <div className="col-md-6">
-                  <img src='./images/gfg.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
-                </div>
-                <div className="col-md-6">
-                  <div className="card-body">
-                    <p className="card-title">UserName: {`${user.leetcode}`} </p>
-                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
-                    <p className="card-title">Course: {`${user.course}`}</p>
-                    <p className="card-title">Registration Number: {`${user.regNo}`}</p>
-                    <p className="card-title">Branch: {`${user.branch}`}</p>
-                    <p className="card-title">Year: {`${user.year}`}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> : <div></div>}
-        {user.codechef ?
-          <div classsName='col-md-6'>
-            <div className="card mb-3" style={style}>
-              <div className="row g-0">
-                <div className="col-md-6">
-                  <img src='./images/codechef.png' className="img-fluid rounded-start py-3" alt="..." style={{ width: '200px' }} />
-                </div>
-                <div className="col-md-6">
-                  <div className="card-body">
-                    <p className="card-title">UserName: {`${user.leetcode}`} </p>
-                    <p className="card-title">Total Ques Solved: {`${leetcodeUser.totalSolved}`}</p>
-                    <p className="card-title">Course: {`${user.course}`}</p>
-                    <p className="card-title">Registration Number: {`${user.regNo}`}</p>
-                    <p className="card-title">Branch: {`${user.branch}`}</p>
-                    <p className="card-title">Year: {`${user.year}`}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> : <div></div>}
       </div>
     </>
 

@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function CollegeProfile(props) {
 
     // const [data, setData] = useState({firstName:'', lastName:'',email:'',course:'',regNo:'',branch:'',year:''});
     // setData(props.queryuser);
+
+    const [data, setData] = useState('');
+
+    useEffect(() => {
+        setData(props.queryuser);
+        console.log(data);
+    }, [props.queryuser])
+    
 
     const style = {
         width: '500px',
@@ -21,12 +29,12 @@ export default function CollegeProfile(props) {
             </div>
             <div className="col-md-8">
                 <div className="card-body">
-                    <p className="card-title">Name: {`${props.queryuser.firstName}`} {`${props.queryuser.lastName}`}</p>
-                    <p className="card-title">Email: {`${props.queryuser.email}`}</p>
-                    <p className="card-title">Course: {`${props.queryuser.course}`}</p>
-                    <p className="card-title">Registration Number: {`${props.queryuser.regNo}`}</p>
-                    <p className="card-title">Branch: {`${props.queryuser.branch}`}</p>
-                    <p className="card-title">Year: {`${props.queryuser.year}`}</p>
+                    <p className="card-title">Name: {`${data.firstName}`} {`${data.lastName}`}</p>
+                    <p className="card-title">Email: {`${data.email}`}</p>
+                    <p className="card-title">Course: {`${data.course}`}</p>
+                    <p className="card-title">Registration Number: {`${data.regNo}`}</p>
+                    <p className="card-title">Branch: {`${data.branch}`}</p>
+                    <p className="card-title">Year: {`${data.year}`}</p>
                 </div>
             </div>
         </div>
