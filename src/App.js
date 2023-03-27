@@ -11,6 +11,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route exact path="/signup" element={<Signup/>} />
             </Routes>
           </div>
+          <Footer/>
         </BrowserRouter>
     </>
   );

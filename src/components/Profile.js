@@ -22,14 +22,14 @@ function Profile() {
   }, [])
 
   useEffect(() => {
-    console.log(posts);
-    let l = fetch(`https://leetcodestats.cyclic.app/${posts.leetcode}`).then((res) => {
+    // console.log(posts);
+    let l = fetch(`https://leetcode-stats-api.herokuapp.com/${posts.leetcode}`).then((res) => {
       return res.json();
     }).then((data) => {
       setLeetcode(data);
-      console.log(leetcodeUser);
+      // console.log(leetcodeUser);
     })
-  }, [posts])
+  }, [posts.leetcode])
 
 
   // let codeforcesUrl = 'https://codeforces.com/api/user.info?handles=' + posts.codeforces
@@ -38,9 +38,9 @@ function Profile() {
       return res.json();
     }).then((data) => {
       setCodeforces(data.result.at(0));
-      console.log(codeforcesUser);
+      // console.log(codeforcesUser);
     })
-  }, [posts])
+  }, [posts.codeforces])
 
   const style = {
     width: '700px',
@@ -86,7 +86,7 @@ function Profile() {
             </div>
           </div>
           <div className='col-md-1'>
-            <img src="./images/gear.png" className='my-2' alt="Edit Profile" data-bs-toggle="modal" data-bs-target="#updateProfile" style={{width: '30px', cursor: 'pointer' }} />
+            <img src="./images/gear.png" className='my-2' alt="Edit Profile" data-bs-toggle="modal" data-bs-target="#updateProfile" style={{ width: '30px', cursor: 'pointer' }} />
             {/* Modal */}
             <form onSubmit={handleSubmit}>
               <div className="modal fade" id="updateProfile" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -99,9 +99,10 @@ function Profile() {
                     <div className="modal-body">
                       <div className="row">
                         <div className="col-md-6">
+                          <input type="text" placeholder="Branch" name="branch" onChange={onChange} value={updatedState.branch} autoComplete="off" />
                           <input type="text" placeholder="First Name" name="firstName" onChange={onChange} value={updatedState.firstName} autoComplete="off" style={{ display: "none" }} />
-                          <input type="text" placeholder="Registration No." name="regNo" onChange={onChange} value={updatedState.regNo} autoComplete="off" style={{ display: "none" }}/>
-                          <input type="text" placeholder="Course" name="course" onChange={onChange} value={updatedState.course} autoComplete="off" required />
+                          <input type="text" placeholder="Registration No." name="regNo" onChange={onChange} value={updatedState.regNo} autoComplete="off" style={{ display: "none" }} />
+                          <input type="text" placeholder="Course" name="course" onChange={onChange} value={updatedState.course} autoComplete="off" required style={{ display: "none" }} />
                           <input type="email" placeholder="Email" name="email" onChange={onChange} value={updatedState.email} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Leetcode Handle" name="leetcode" onChange={onChange} value={updatedState.leetcode} autoComplete="off" />
                         </div>
@@ -109,10 +110,9 @@ function Profile() {
 
                           <input type="text" placeholder="Last Name" name="lastName" onChange={onChange} value={updatedState.lastName} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Year" name="year" onChange={onChange} value={updatedState.year} autoComplete="off" required />
-                          <input type="text" placeholder="Branch" name="branch" onChange={onChange} value={updatedState.branch} autoComplete="off" style={{ display: "none" }} />
                           <input type="text" placeholder="Codeforces Handle" name="codeforces" onChange={onChange} value={updatedState.codeforces} autoComplete="off" />
-                          <input type="text" placeholder="Codechef Handle" name="codechef" onChange={onChange} value={updatedState.codechef} autoComplete="off" style={{ display: "none" }}/>
-                          <input type="text" placeholder="GFG Handle" name="gfg" onChange={onChange} value={updatedState.gfg} autoComplete="off" style={{ display: "none" }}/>
+                          <input type="text" placeholder="Codechef Handle" name="codechef" onChange={onChange} value={updatedState.codechef} autoComplete="off" style={{ display: "none" }} />
+                          <input type="text" placeholder="GFG Handle" name="gfg" onChange={onChange} value={updatedState.gfg} autoComplete="off" style={{ display: "none" }} />
                         </div>
 
                         <div className="col-md-12">
@@ -130,14 +130,15 @@ function Profile() {
               </div>
             </form>
           </div>
-          {/* <div className='col-md-5'></div> */}
           <div className="col-md-12">
             <p>About: {`${posts.about}`}</p>
           </div>
         </div>
       </div>
-
-      <h1>Profiles</h1>
+      {posts.leetcode || posts.codeforces?
+      <div className="text-center my-5" style={{display:'inline', color:'#ffffff'}}>
+        <h1><u>Coding Profiles</u></h1>
+      </div>:<div></div>}
       <div className="row">
 
         {posts.leetcode ?
