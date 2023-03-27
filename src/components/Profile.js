@@ -29,7 +29,7 @@ function Profile() {
       setLeetcode(data);
       // console.log(leetcodeUser);
     })
-  }, [posts.leetcode])
+  }, [posts])
 
 
   // let codeforcesUrl = 'https://codeforces.com/api/user.info?handles=' + posts.codeforces
@@ -40,7 +40,7 @@ function Profile() {
       setCodeforces(data.result.at(0));
       // console.log(codeforcesUser);
     })
-  }, [posts.codeforces])
+  }, [posts])
 
   const style = {
     width: '700px',
@@ -135,12 +135,12 @@ function Profile() {
           </div>
         </div>
       </div>
-      {posts.leetcode || posts.codeforces?
-      <div className="text-center my-5" style={{display:'inline', color:'#ffffff'}}>
-        <h1><u>Coding Profiles</u></h1>
-      </div>:<div></div>}
-      <div className="row">
+      {posts.leetcode || posts.codeforces ?
+        <div className="text-center my-5" style={{ display: 'inline', color: '#ffffff' }}>
+          <h1><u>Coding Profiles</u></h1>
+        </div> : <div></div>}
 
+      <div className="row">
         {posts.leetcode ?
           <div classsName='col-md-6'>
             <div className="card mb-3" style={style}>
@@ -171,13 +171,13 @@ function Profile() {
                 </div>
                 <div className="col-md-6">
                   <div className="card-body">
-                    <p className="card-title">UserName: {`${posts.codeforces}`} </p>
-                    <p className="card-title">Rank: {`${codeforcesUser.rank}`}</p>
-                    <p className="card-title">Rating: {`${codeforcesUser.rating}`}</p>
-                    <p className="card-title">Max Rank: {`${codeforcesUser.maxRank}`}</p>
-                    <p className="card-title">Max rating: {`${codeforcesUser.maxRating}`}</p>
-                    <p className="card-title">Friends: {`${codeforcesUser.friendOfCount}`}</p>
-                    <a target={'_blank'} className='btn btn-outline-primary' href={`https://codeforces.com/profile/${posts.codeforces}`}>Codeforces Profile</a>
+                    <p className="card-title">User Name: {`${posts.codeforces}`} </p>
+                    <p className="card-title">Total Ques Solved: {`${codeforcesUser.rank}`}</p>
+                    <p className="card-title">Easy: {`${codeforcesUser.rating}`}</p>
+                    <p className="card-title">Medium: {`${codeforcesUser.maxRank}`}</p>
+                    <p className="card-title">Hard: {`${codeforcesUser.maxRating}`}</p>
+                    <p className="card-title">Ranking: {`${codeforcesUser.friendOfCount}`}</p>
+                    <a target={'_blank'} className='btn btn-outline-primary' href={`https://leetcode.com/${posts.codeforces}`}>Leetcode Profile</a>
                   </div>
                 </div>
               </div>

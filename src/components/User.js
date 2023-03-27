@@ -88,7 +88,6 @@ function User() {
         </div> : <div></div>
       }
       <div className="row">
-
         {user.leetcode ?
           <div classsName='col-md-6'>
             <div className="card mb-3" style={style}>
